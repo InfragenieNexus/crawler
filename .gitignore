@@ -1,3 +1,7 @@
-
+# Ignorar diretórios __pycache__ e .pytest_cache
 __pycache__/
 .pytest_cache/
+
+# Ignorar diretório venv ou .env
+venv/
+.env
