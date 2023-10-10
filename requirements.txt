@@ -32,4 +32,5 @@ urllib3==2.0.6
 webdriver-manager==4.0.1
 wsproto==1.2.0
 PyVirtualDisplay==3.0
-
+black==23.9.1
+flake8==6.1.0

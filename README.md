@@ -14,6 +14,26 @@ O projeto consiste em três partes principais:
 
 - **selenium.py**: Este módulo usa o Selenium para tirar screenshots em tela cheia do site "quotes.toscrape".
 
+
+## Usando Make
+
+Este projeto utiliza um Makefile para simplificar tarefas comuns de desenvolvimento, como formatação e verificação de código. Aqui está uma explicação de como usar os comandos disponíveis no Makefile:
+
+Para executar os comandos, abra um terminal no diretório raiz do projeto e execute o seguinte comando:
+
+```bash
+make format
+```
+Isso aplicará a formatação ao código Python no diretório atual e em subdiretórios, seguindo as convenções de estilo do black. É uma boa prática executar este comando antes de enviar seu código para revisão ou quando desejar manter uma formatação consistente.
+
+```bash
+make crawler
+```
+Isso iniciará a execução do seu projeto, que deve estar configurado no arquivo __main__.py.
+
+
+
+
 ## Como Executar com Docker
 
 Você pode executar este projeto dentro de um contêiner Docker sem a necessidade de instalar dependências no ambiente local. Siga estas etapas:
@@ -29,7 +49,7 @@ Certifique-se de ter o Docker instalado em seu sistema.
 3. Execute o comando de build do Docker para criar a imagem do contêiner:
 
 ```bash
-docker build -t nome-da-imagem .7
+docker build -t nome-da-imagem .
 ```
 
 ### Execução do Contêiner
@@ -40,15 +60,13 @@ docker build -t nome-da-imagem .7
 docker run -it nome-da-imagem
 ```
 
-
-
 Isso iniciará o programa principal dentro do contêiner Docker, onde você pode interagir com o web scraping.
 
-5. Siga as instruções exibidas no terminal para selecionar a opção desejada (ver citações por autor, ver citações por tag ou sair).
+6. Siga as instruções exibidas no terminal para selecionar a opção desejada (ver citações por autor, ver citações por tag ou sair).
 
 ## Resultado
 
-As citações serão salvas em arquivos CSV, e screenshots também serão capturadas e salvas dentro do contêiner Docker.
+As citações serão salvas em arquivos CSV, e screenshots também serão capturadas e salvas dentro da pasta output.
 
 ## Exemplo de Uso
 
