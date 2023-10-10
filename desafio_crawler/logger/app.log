@@ -1,0 +1,57 @@
+2023-10-10 12:50:01,054 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 12:50:06,453 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 12:57:22,910 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 12:57:39,320 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 13:11:17,589 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:11:31,566 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 13:13:52,522 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:13:55,278 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 13:16:19,870 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:16:35,603 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 13:22:40,297 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:22:58,979 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 13:30:41,051 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:30:44,384 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Service /root/.cache/selenium/chromedriver/linux64/117.0.5938.149/chromedriver unexpectedly exited. Status code was: 127
+
+2023-10-10 13:44:15,300 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:44:18,113 [WARNING] - Exception managing chrome: Unable to discover proper chromedriver version in offline mode
+2023-10-10 13:44:18,944 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: session not created: Chrome failed to start: exited normally.
+  (session not created: DevToolsActivePort file doesn't exist)
+  (The process started from chrome location /opt/google/chrome/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+Stacktrace:
+#0 0x55f56adb06b3 <unknown>
+#1 0x55f56aa861e7 <unknown>
+#2 0x55f56aab9526 <unknown>
+#3 0x55f56aab569c <unknown>
+#4 0x55f56aaf823a <unknown>
+#5 0x55f56aaeee93 <unknown>
+#6 0x55f56aac1934 <unknown>
+#7 0x55f56aac271e <unknown>
+#8 0x55f56ad75cb8 <unknown>
+#9 0x55f56ad79bf0 <unknown>
+#10 0x55f56ad8419c <unknown>
+#11 0x55f56ad7a808 <unknown>
+#12 0x55f56ad4727f <unknown>
+#13 0x55f56ad9ee88 <unknown>
+#14 0x55f56ad9f059 <unknown>
+#15 0x55f56adaf843 <unknown>
+#16 0x7f9df2592609 start_thread
+
+2023-10-10 13:53:50,703 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:53:54,151 [ERROR] - Falha ao obter citações por tag e salvar em CSV: __init__() got an unexpected keyword argument 'executable_path'
+2023-10-10 13:55:01,547 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 13:55:17,729 [WARNING] - Exception managing firefox: Unable to discover proper geckodriver version in offline mode
+2023-10-10 13:55:18,349 [ERROR] - Falha ao obter citações por tag e salvar em CSV: Message: Process unexpectedly closed with status 1
+
+2023-10-10 14:03:39,985 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 14:03:43,541 [ERROR] - Falha ao obter citações por tag e salvar em CSV: __init__() got an unexpected keyword argument 'executable_path'
+2023-10-10 14:11:59,805 [INFO] - Conectado ao site: https://quotes.toscrape.com/
+2023-10-10 14:12:04,027 [INFO] - ====== WebDriver manager ======
+2023-10-10 14:12:04,100 [INFO] - Get LATEST chromedriver version for google-chrome
+2023-10-10 14:12:04,100 [ERROR] - Falha ao obter citações por tag e salvar em CSV: 'NoneType' object has no attribute 'split'

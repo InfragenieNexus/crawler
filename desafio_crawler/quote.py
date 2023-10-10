@@ -1,3 +1,4 @@
+# Importações
 import requests
 from bs4 import BeautifulSoup
 import logging
@@ -5,15 +6,28 @@ import pandas as pd
 
 from selenium import webdriver
 from datetime import datetime
+import chromedriver_autoinstaller
+from pyvirtualdisplay import Display
 
-import logging
+# Instalação automática do ChromeDriver
+chromedriver_autoinstaller.install()
 
-def setup_logger()-> None:
-    """Function to setup the logger"""
-    logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s [%(levelname)s] - %(message)s')
+# Configuração das opções do Chrome
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--no-sandbox")
+
+# Configuração do logger
+def setup_logger() -> None:
+    """Função para configurar o logger"""
+    logging.basicConfig(filename='logger/app.log', level=logging.INFO, format='%(asctime)s [%(levelname)s] - %(message)s')
     logging.getLogger().setLevel(logging.INFO)
     logging.getLogger().addHandler(logging.StreamHandler())
 
+# Inicialização do Display Virtual (Xvfb)
+display = Display(visible=0, size=(1920, 1080))
+display.start()
+
+# Configuração do logger
 setup_logger()
 
 class NameGenerator:
@@ -21,9 +35,9 @@ class NameGenerator:
     @staticmethod
     def generate_name_with_timestamp(name, *filters) -> str:
         now = datetime.now()
-        timestamp = now.strftime("%d-%m-%H-%M")  # Formato: dia-mês-hora-minuto
+        timestamp = now.strftime("%d-%m-%H-%M")
+        filter_str = '_'.join(str(filter) for filter in filters if filter is not None)
 
-        filter_str = '_'.join(filter for filter in filters if filter)
         result = f"output/{name}_{filter_str}_{timestamp}"
 
         return result
@@ -32,7 +46,8 @@ class FullScreenScreenshot:
     """Class to take a screenshot of an entire page"""
     def __init__(self, url):
         self.url = url
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(options=chrome_options)
+
 
     def take_screenshot(self, filename='screenshot.png')-> None:
         try:
@@ -40,10 +55,8 @@ class FullScreenScreenshot:
             self.driver.maximize_window()
             self.driver.get_screenshot_as_file(filename)
             print(f"Captura de tela da página '{self.url}' salva como '{filename}'")
-            self.close_browser()
         except Exception as e:
             print(f"Erro ao tirar a captura de tela: {str(e)}")
-            self.close_browser()
 
     def close_browser(self)-> None:
         self.driver.quit()
@@ -120,7 +133,7 @@ class SiteScraper:
             csv_filename = NameGenerator.generate_name_with_timestamp(author, None) 
             df = pd.DataFrame(quotes_info, columns=['Author', 'Tags', 'Quote'])
 
-            df.to_csv(F"{csv_filename}+.png", index=False)
+            df.to_csv(F"{csv_filename}+.csv", index=False)
 
             pic = FullScreenScreenshot(url=self.site_url)
             pic.take_screenshot(f"{csv_filename}.png")
@@ -136,14 +149,12 @@ class SiteScraper:
         """Return quotes by a specific tag and save to a CSV file"""
         try:
             quotes_info = self._get_quotes_info()
-
             if tag:
                 quotes_info = [quote for quote in quotes_info if tag in quote['Tags']]
+                csv_filename = NameGenerator.generate_name_with_timestamp(None, tag)
+                df = pd.DataFrame(quotes_info, columns=['Author', 'Tags', 'Quote'])
 
-            csv_filename = NameGenerator.generate_name_with_timestamp(None, tag)
-            df = pd.DataFrame(quotes_info, columns=['Author', 'Tags', 'Quote'])
-
-            df.to_csv(f"{csv_filename}.png", index=False)
+            df.to_csv(f"{csv_filename}.csv", index=False)
             url_tag = self._create_url_with_tag(tag)
             pic = FullScreenScreenshot(url=url_tag)
             pic.take_screenshot(f"{csv_filename}.png")
