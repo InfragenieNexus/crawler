@@ -5,3 +5,7 @@ __pycache__/
 # Ignorar diretório venv ou .env
 venv/
 .env
+
+# Ignorar diretório output
+output/
+
