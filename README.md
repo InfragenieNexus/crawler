@@ -104,7 +104,7 @@ Essas interações permitem ao usuário personalizar a forma como ele recebe as 
 
 
 ## Arquitetura do projeto 
-
+```
 |-- desafio_crawler
 |   |-- logger
 |   |   |-- log_script.py
@@ -131,6 +131,7 @@ Essas interações permitem ao usuário personalizar a forma como ele recebe as 
 |-- .gitignore
 |-- docker-compose.yml
 |-- readme.md
+```
 
 A pasta "logger" contém um arquivo de script chamado `script.py` para exibir os logs do projeto, assim como um arquivo que pode ser lido para hospedar esses logs.
 
