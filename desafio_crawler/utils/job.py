@@ -6,10 +6,8 @@ from quote import SiteScraper
 sys.stdout = open("/var/log/job.log", "a")
 sys.stderr = open("/var/log/job.log", "a")
 
-# Adicione uma mensagem de início para verificar se o script está sendo executado
 print("Script job.py iniciado.")
 
-# Seu código existente
 url = "https://quotes.toscrape.com/"
 site = SiteScraper(url)
 site.get_all_quotes_and_save_to_csv()
