@@ -2,7 +2,14 @@ find: ‘/root/.config/chromium/Crash Reports/pending/’: No such file or direc
 WARNING:root:Can not find chromedriver for currently installed chrome version.
 find: ‘/root/.config/chromium/Crash Reports/pending/’: No such file or directory
 WARNING:root:Can not find chromedriver for currently installed chrome version.
-Traceback (most recent call last):
-  File "__main__.py", line 2, in <module>
-    from utils.logger import show_logs_until_enter
-ImportError: cannot import name 'show_logs_until_enter' from 'utils.logger' (/app/utils/logger.py)
+INFO:root:Conectado ao site: https://quotes.toscrape.com/
+Conectado ao site: https://quotes.toscrape.com/
+Escolha uma opção digitando o número desejado: Pressione Enter para continuar...Escolha uma opção digitando o número desejado: WARNING:selenium.webdriver.common.selenium_manager:The chromedriver version (117.0.5938.149) detected in PATH at /usr/bin/chromedriver might not be compatible with the detected chrome version (118.0.5993.70); currently, chromedriver 118.0.5993.70 is recommended for chrome 118.*, so it is advised to delete the driver in PATH and retry
+The chromedriver version (117.0.5938.149) detected in PATH at /usr/bin/chromedriver might not be compatible with the detected chrome version (118.0.5993.70); currently, chromedriver 118.0.5993.70 is recommended for chrome 118.*, so it is advised to delete the driver in PATH and retry
+INFO:core_db:Citação inserida com sucesso no banco de dados.
+Citação inserida com sucesso no banco de dados.
+INFO:root:Citações salvas em output/____11-10-17-07.csv
+Citações salvas em output/____11-10-17-07.csv
+Escolha uma opção digitando o número desejado: Pressione Enter para continuar...Escolha uma opção digitando o número desejado: ATH and retry
+2023-10-11 17:07:17,432 - core_db - INFO - Citação inserida com sucesso no banco de dados.
+2023-10-11 17:07:18,174 - root - INFO - Citações salvas em output/____11-10-17-07.csv

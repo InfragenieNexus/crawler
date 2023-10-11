@@ -1,14 +1,15 @@
+import os
 import requests
-from bs4 import BeautifulSoup
 import logging
+from bs4 import BeautifulSoup
 import pandas as pd
-
+from core_db import QuoteDatabase
 import chromedriver_autoinstaller
 from utils.screenshot import FullScreenScreenshot
-from utils.name_generator import NameGenerator
 from utils.logger import setup_logger
+from utils.name_generator import NameGenerator
 
-# Instalação automática do ChromeDriver
+
 chromedriver_autoinstaller.install()
 setup_logger()
 
@@ -55,24 +56,37 @@ class SiteScraper:
         authors = [span.text for span in authors_span]
         return authors
 
-    def get_all_quotes_and_save_to_csv(self) -> None:
+    def _create_url_with_tag(self, tag) -> str:
+        """here create a url with the tag"""
+        return f"{self.site_url}/tag/{tag}"
+
+    def get_all_quotes_and_save_to_csv_db(self) -> None:
         """Return all quotes and save to a CSV file"""
         try:
             quotes_info = self._get_quotes_info()
             df = pd.DataFrame(quotes_info, columns=["Author", "Tags", "Quote"])
 
-            csv_filename = NameGenerator.generate_name_with_timestamp(None, None)
-            df.to_csv(csv_filename + ".csv", index=False)
+            csv_filename = (
+                "output/"
+                + NameGenerator.generate_name_with_timestamp("_", "_")
+                + ".csv"
+            )
+
+            df.to_csv(csv_filename, index=False)
 
             pic = FullScreenScreenshot(url=self.site_url)
-            pic.take_screenshot(f"{csv_filename}.png")
+            pic_binary = pic.take_screenshot_to_binary()
+
+            database = QuoteDatabase("mydatabase.db")
+            database.insert_quote(pic_binary, quotes_info)
+            pic.take_screenshot(csv_filename.replace(".csv", ".png"))
 
             logging.info(f"Citações salvas em {csv_filename}")
         except Exception as e:
             logging.error(f"Falha ao obter citações e salvar em CSV: {str(e)}")
 
     def get_quotes_by_author(self, author=None) -> None:
-        """Return quotes by a specific author and save to a CSV file"""
+        """Return quotes by a specific author and save to the database"""
         try:
             quotes_info = self._get_quotes_info()
             if author:
@@ -80,36 +94,60 @@ class SiteScraper:
                     quote for quote in quotes_info if quote["Author"] == author
                 ]
 
-            csv_filename = NameGenerator.generate_name_with_timestamp(author, None)
             df = pd.DataFrame(quotes_info, columns=["Author", "Tags", "Quote"])
 
-            df.to_csv(f"{csv_filename}+.csv", index=False)
-
-            pic = FullScreenScreenshot(url=self.site_url)
-            pic.take_screenshot(f"{csv_filename}.png")
-            logging.info(f"Citações de {author} salvas em {csv_filename}")
-        except Exception as e:
-            logging.error(
-                f"Falha ao obter citações por autor e salvar em CSV: {str(e)}"
+            csv_filename = (
+                "output/"
+                + NameGenerator.generate_name_with_timestamp(author, "_")
+                + ".csv"
             )
 
-    def _create_url_with_tag(self, tag) -> str:
-        """here create a url with the tag"""
-        return f"{self.site_url}/tag/{tag}"
+            df.to_csv(csv_filename, index=False)
+
+            pic = FullScreenScreenshot(url=self.site_url)
+            pic_binary = pic.take_screenshot_to_binary()
+            pic.take_screenshot(csv_filename.replace(".csv", ".png"))
+
+            database = QuoteDatabase("mydatabase.db")
+            database.insert_quote(pic_binary, quotes_info)
+
+            logging.info(
+                f"Citações de {author} salvas em {csv_filename} e no banco de dados"
+            )
+        except Exception as e:
+            logging.error(
+                f"Falha ao obter citações por autor e salvar em CSV e no banco de dados: {str(e)}"
+            )
 
     def get_quotes_by_tag(self, tag=None) -> None:
-        """Return quotes by a specific tag and save to a CSV file"""
+        """Return quotes by a specific tag and save to the database"""
         try:
             quotes_info = self._get_quotes_info()
             if tag:
                 quotes_info = [quote for quote in quotes_info if tag in quote["Tags"]]
-                csv_filename = NameGenerator.generate_name_with_timestamp(None, tag)
-                df = pd.DataFrame(quotes_info, columns=["Author", "Tags", "Quote"])
 
-            df.to_csv(f"{csv_filename}.csv", index=False)
+            df = pd.DataFrame(quotes_info, columns=["Author", "Tags", "Quote"])
+
+            csv_filename = (
+                "output/"
+                + NameGenerator.generate_name_with_timestamp("_", tag)
+                + ".csv"
+            )
+
+            df.to_csv(csv_filename, index=False)
+
             url_tag = self._create_url_with_tag(tag)
             pic = FullScreenScreenshot(url=url_tag)
-            pic.take_screenshot(f"{csv_filename}.png")
-            logging.info(f"Citações com a tag {tag} salvas em {csv_filename}")
+            pic.take_screenshot(csv_filename.replace(".csv", ".png"))
+
+            pic_binary = pic.take_screenshot_to_binary()
+            database = QuoteDatabase("mydatabase.db")
+            database.insert_quote(pic_binary, quotes_info)
+
+            logging.info(
+                f"Citações com a tag {tag} salvas em {csv_filename} e no banco de dados"
+            )
         except Exception as e:
-            logging.error(f"Falha ao obter citações por tag e salvar em CSV: {str(e)}")
+            logging.error(
+                f"Falha ao obter citações por tag e salvar em CSV e no banco de dados: {str(e)}"
+            )

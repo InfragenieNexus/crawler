@@ -1,12 +1,6 @@
-version: '3' # Certifique-se de especificar a versão correta do Docker Compose
+version: '3'
 
 services:
-    # db:
-    #     image: postgres:12.1
-    #     environment:
-    #         POSTGRES_USER: postgres
-    #         POSTGRES_PASSWORD: postgres
-
     desafio_crawler:
         build:
             context: .

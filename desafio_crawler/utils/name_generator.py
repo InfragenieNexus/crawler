@@ -10,6 +10,6 @@ class NameGenerator:
         timestamp = now.strftime("%d-%m-%H-%M")
         filter_str = "_".join(str(filter) for filter in filters if filter is not None)
 
-        result = f"output/{name}_{filter_str}_{timestamp}"
+        result = f"{name}_{filter_str}_{timestamp}"
 
         return result
