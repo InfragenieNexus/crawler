@@ -1,20 +1,19 @@
 from quote import SiteScraper
-
+from utils.logger import show_logs_until_enter
 
 def apresentacao():
     print("Bem-vindo ao Desafio Crawler! Como você gostaria de receber citações hoje?")
     print("1. Ver citações por autor")
     print("2. Ver citações por tag")
-    print("3. Sair")
+    print("3. Ver todas as citações")
+    print("4. Ver logs")
+    print("5. Sair")
+
 
 
 def main():
-    url = input(
-        "Digite a URL do site de citações (ou pressione Enter para usar 'https://quotes.toscrape.com/'): "
-    )
-    url = (
-        url.strip() or "https://quotes.toscrape.com/"
-    )  # Usar a URL padrão se nenhum URL for fornecido
+    # Defina a URL diretamente no script
+    url = "https://quotes.toscrape.com/"
     site_instance = SiteScraper(url)
 
     while True:
@@ -36,12 +35,15 @@ def main():
             tag = input("Digite a tag desejada para ver citações relacionadas: ")
             site_instance.get_quotes_by_tag(tag)
         elif choice == "3":
+            site_instance.get_all_quotes_and_save_to_csv()
+            print("Todas as citações foram salvas em um arquivo CSV.")
+        elif choice == "4":
+            show_logs_until_enter()
+        elif choice == "5":
             print("Obrigado por usar o Desafio Crawler. Até a próxima!")
             break
         else:
             print("Opção inválida. Por favor, escolha uma opção válida.")
-
-        ### adicionar para pegar todas sem filtro algum
 
 
 if __name__ == "__main__":

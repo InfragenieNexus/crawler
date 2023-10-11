@@ -1,74 +1,16 @@
-# Importações
 import requests
 from bs4 import BeautifulSoup
 import logging
 import pandas as pd
 
-from selenium import webdriver
-from datetime import datetime
 import chromedriver_autoinstaller
-from pyvirtualdisplay import Display
+from utils.screenshot import FullScreenScreenshot
+from utils.name_generator import NameGenerator
+from utils.logger import setup_logger
 
 # Instalação automática do ChromeDriver
 chromedriver_autoinstaller.install()
-
-# Configuração das opções do Chrome
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--no-sandbox")
-
-
-# Configuração do logger
-def setup_logger() -> None:
-    """Função para configurar o logger"""
-    logging.basicConfig(
-        filename="logger/app.log",
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] - %(message)s",
-    )
-    logging.getLogger().setLevel(logging.INFO)
-    logging.getLogger().addHandler(logging.StreamHandler())
-
-
-# Inicialização do Display Virtual (Xvfb)
-display = Display(visible=0, size=(1920, 1080))
-display.start()
-
-# Configuração do logger
 setup_logger()
-
-
-class NameGenerator:
-    """Class to generate a name for the output file"""
-
-    @staticmethod
-    def generate_name_with_timestamp(name, *filters) -> str:
-        now = datetime.now()
-        timestamp = now.strftime("%d-%m-%H-%M")
-        filter_str = "_".join(str(filter) for filter in filters if filter is not None)
-
-        result = f"output/{name}_{filter_str}_{timestamp}"
-
-        return result
-
-
-class FullScreenScreenshot:
-    """Class to take a screenshot of an entire page"""
-
-    def __init__(self, url):
-        self.url = url
-        self.driver = webdriver.Chrome(options=chrome_options)
-
-    def take_screenshot(self, filename="screenshot.png") -> None:
-        try:
-            self.driver.get(self.url)
-            self.driver.maximize_window()
-            self.driver.get_screenshot_as_file(filename)
-            print(f"Captura de tela da página '{self.url}' salva como '{filename}'")
-        except Exception as e:
-            print(f"Erro ao tirar a captura de tela: {str(e)}")
-
-    def close_browser(self) -> None:
-        self.driver.quit()
 
 
 class SiteScraper:
@@ -80,7 +22,7 @@ class SiteScraper:
         self.soup = self._make_request()
         logging.info(f"Conectado ao site: {self.site_url}")
 
-    def _make_request(self):
+    def _make_request(self) -> BeautifulSoup:
         """here make a request to the site and return a BeautifulSoup object"""
         try:
             response = requests.get(self.site_url, headers=self.headers)
@@ -113,7 +55,7 @@ class SiteScraper:
         authors = [span.text for span in authors_span]
         return authors
 
-    def get_all_quotes_and_save_to_csv(self):
+    def get_all_quotes_and_save_to_csv(self) -> None:
         """Return all quotes and save to a CSV file"""
         try:
             quotes_info = self._get_quotes_info()
@@ -151,7 +93,7 @@ class SiteScraper:
                 f"Falha ao obter citações por autor e salvar em CSV: {str(e)}"
             )
 
-    def _create_url_with_tag(self, tag):
+    def _create_url_with_tag(self, tag) -> str:
         """here create a url with the tag"""
         return f"{self.site_url}/tag/{tag}"
 

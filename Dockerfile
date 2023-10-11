@@ -15,21 +15,24 @@ ENV PATH="/usr/lib/chromium-browser:${PATH}"
 
 ENV DISPLAY=:99
 
-
 # Define o diretório de trabalho como /app
 WORKDIR /app
 
 # Copie os arquivos do seu aplicativo para o contêiner
-COPY . /app
+COPY ./desafio_crawler /app
 
 # Instale as dependências Python a partir do requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copie o arquivo start.sh para o contêiner
-COPY start.sh /app/start.sh
+COPY ./desafio_crawler/start.sh /app/start.sh
 
 # Dê permissões de execução para o arquivo start.sh
 RUN chmod +x /app/start.sh
 
-# Defina o comando principal do seu aplicativo (substitua CMD com o comando apropriado)
-CMD ["/app/start.sh"]
+# Instale o cron
+RUN apt-get update && apt-get install -y cron
+
+
+# Defina o comando de inicialização
+CMD ["/bin/bash"]

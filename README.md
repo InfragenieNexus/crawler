@@ -12,8 +12,6 @@ O projeto consiste em três partes principais:
 
 - **main.py**: Este é o programa principal que permite ao usuário interagir com a biblioteca `quote.py` através de uma interface de linha de comando. O usuário pode escolher entre ver citações por autor, ver citações por tag ou sair do programa.
 
-- **selenium.py**: Este módulo usa o Selenium para tirar screenshots em tela cheia do site "quotes.toscrape".
-
 
 ## Usando Make
 
@@ -86,4 +84,6 @@ Este é um projeto básico de web scraping que demonstra como extrair informaç�
 
 **Nota:** Certifique-se de respeitar os termos de uso do site que você está raspando e considere a ética e a legalidade ao usar essas técnicas.
 
+
+## Logs 
 
