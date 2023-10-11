@@ -46,24 +46,6 @@ docker-compose up -d
 docker run -it desafio_crawler /bin/bash
 
 ```
-#### Usando Make
-Este projeto utiliza um Makefile para simplificar tarefas comuns de desenvolvimento, como formatação e verificação de código. Aqui está uma explicação de como usar os comandos disponíveis no Makefile:
-
-Para executar os comandos, abra um terminal no diretório raiz do projeto e execute o seguinte comando:
-
-
-```bash
-make format
-```
-Isso aplicará a formatação ao código Python no diretório atual e em subdiretórios, seguindo as convenções de estilo do black. É uma boa prática executar este comando antes de enviar seu código para revisão ou quando desejar manter uma formatação consistente.
-
-
-```bash
-make play-crawler
-```
-Isso iniciará a execução do seu projeto, que deve estar configurado no arquivo `main.py`.
-
-
 ## Usando Make
 
 Este projeto utiliza um Makefile para simplificar tarefas comuns de desenvolvimento, como formatação e verificação de código. A seguir, estão os comandos disponíveis no Makefile:
