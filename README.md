@@ -12,9 +12,9 @@ O projeto Desafio Crawler foi desenvolvido com o objetivo de extrair dados de um
 - Extras:
     - [x]  Armazenar os resultados em um banco de dados relacional ou não-relacional
     - [x]  Criar um dataframe para visualizar os resultados usando o pandas
-    - [ ]  Capturar resultados dinamicamente sem fixar os caminhos xpath
+    - [x]  Capturar resultados dinamicamente sem fixar os caminhos xpath
     - [x]  Dockerizar a aplicação
-    - [ ]  Agendar a execução para uma data e horário específicos.
+    - [x]  Agendar a execução para uma data e horário específicos.
 
 
 
