@@ -150,3 +150,8 @@ A seguir, são apresentadas as melhorias sugeridas para o projeto Desafio Crawle
 8. Adicionar uma biblioteca de tracing para acompanhar todo o processo e armazená-lo no banco de dados.
 
 Essas melhorias contribuirão para aprimorar a funcionalidade, a eficiência e a confiabilidade do projeto Desafio Crawler.
+
+### Infrastructure model
+![Infrastructure main model](.infragenie/infrastructure_main_model.svg)
+
+---
